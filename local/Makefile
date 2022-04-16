@@ -17,5 +17,11 @@ build:
 
 nginx:
 	@docker-compose -f docker-compose-local.yaml exec nginx bash
+mysql:
+	@docker-compose -f docker-compose-local.yaml exec mysql bash
+backend:
+	@docker-compose -f docker-compose-local.yaml exec backend bash
+frontend:
+	@docker-compose -f docker-compose-local.yaml exec backend bash
 
-.PHONY: up-d down restart ps logs build nginx
+.PHONY: up-d down restart ps logs build nginx mysql backend frontend

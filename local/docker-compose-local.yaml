@@ -25,6 +25,9 @@ services:
       build:
         context: ./localMysql
         dockerfile: Dockerfile
+      volumes:
+        - ./localMysql/mysql_log:/var/log/mysql
+        - ./localMysql/my.cnf:/etc/mysql/my.cnf
       environment:
         MYSQL_ALLOW_EMPTY_PASSWORD: 1
         MYSQL_DATABASE: "app"
