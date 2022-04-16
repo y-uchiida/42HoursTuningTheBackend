@@ -17,11 +17,5 @@ build:
 
 nginx:
 	@docker-compose exec nginx bash
-mysql:
-	@docker-compose exec mysql bash
-backend:
-	@docker-compose exec backend bash
-frontend:
-	@docker-compose exec backend bash
 
-.PHONY: up-d down restart ps logs build nginx mysql backend frontend
+.PHONY: up-d down restart ps logs build nginx
