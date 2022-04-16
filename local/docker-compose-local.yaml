@@ -1,6 +1,7 @@
 version: "3.7"
 services:
     nginx:
+      platform: linux/amd64
       build:
         context: ./localNginx #ローカル開発用です。HTTPSポートは公開しません 
         dockerfile: Dockerfile
@@ -13,21 +14,21 @@ services:
         - ./localNginx/nginx.conf:/etc/nginx/nginx.conf
         - ./localNginx/nginx_log:/var/log/nginx
     backend:
+      platform: linux/amd64
       init: true
       build:
         context: ../development/backend
         dockerfile: Dockerfile
     frontend:
+      platform: linux/amd64
       build:
         context: ./dummyFrontend #dummyFrontendはダミーのhtmlのみ返却します。
         dockerfile: Dockerfile
     mysql:
+      platform: linux/amd64
       build:
         context: ./localMysql
         dockerfile: Dockerfile
-      volumes:
-        - ./localMysql/mysql_log:/var/log/mysql
-        - ./localMysql/my.cnf:/etc/mysql/my.cnf
       environment:
         MYSQL_ALLOW_EMPTY_PASSWORD: 1
         MYSQL_DATABASE: "app"

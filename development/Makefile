@@ -15,6 +15,9 @@ logs:
 build:
 	docker-compose build
 
+cp_slow_query:
+	@docker cp $(shell docker-compose ps -q mysql):/var/lib/mysql/slow_query.log ./localMysql/mysql_log/slow_query.log
+
 nginx:
 	@docker-compose exec nginx bash
 mysql:

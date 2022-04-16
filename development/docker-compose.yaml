@@ -33,8 +33,6 @@ services:
         dockerfile: Dockerfile
       volumes:
         - ../volume/mysql:/var/lib/mysql
-        - ./mysql/mysql_log:/var/log/mysql
-        - ./mysql/my.cnf:/etc/mysql/my.cnf
       environment:
         MYSQL_ALLOW_EMPTY_PASSWORD: 1
         MYSQL_DATABASE: "app"
