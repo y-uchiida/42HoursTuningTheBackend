@@ -18,3 +18,4 @@ ALTER TABLE record ADD INDEX index_created_at (created_at);
 ALTER TABLE record ADD INDEX index_updated_at (updated_at);
 
 ALTER TABLE record ADD INDEX index_updated_id (updated_at desc, record_id asc);
+ALTER TABLE record ADD INDEX category_application_group (category_id asc, application_group asc);
