@@ -18,5 +18,4 @@ build:
 nginx:
 	@docker-compose -f docker-compose-local.yaml exec nginx bash
 
-.phony:
-	up-d ps build nginx
+.PHONY: up-d down restart ps logs build nginx

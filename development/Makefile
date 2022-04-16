@@ -18,5 +18,4 @@ build:
 nginx:
 	@docker-compose exec nginx bash
 
-.phony:
-	up-d down restart ps logs build nginx
+.PHONY: up-d down restart ps logs build nginx
