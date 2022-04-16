@@ -14,6 +14,7 @@ RUN \
   wget https://raw.githubusercontent.com/major/MySQLTuner-perl/master/vulnerabilities.csv -O ~/vulnerabilities.csv
 
 COPY ./custom.conf /etc/mysql/conf.d/mysql.cnf
+COPY ./my.cnf /etc/mysql/my.cnf
 COPY ./sql/V0.sql /docker-entrypoint-initdb.d/1_init.sql
 COPY ./sql/2_loadTestData.sql /docker-entrypoint-initdb.d/
 COPY ./data/* /docker-entrypoint-initdb.d/
