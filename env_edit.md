@@ -16,3 +16,15 @@ unar alp_linux_amd64.zip
 sudo install alp /usr/local/bin/alp
 ```
 
+- percona-toolkit インストール
+```
+apt --fix-broken install
+sudo apt-get install gdebi
+wget https://downloads.percona.com/downloads/percona-toolkit/3.3.1/binary/debian/focal/x86_64/percona-toolkit_3.3.1-1.focal_amd64.deb ~/
+gdebi ~/percona-toolkit_3.3.1-1.focal_amd64.deb
+```
+
+- pt-query-digest 使い方
+1. 採点モジュールを実行する
+2. `make cp_slow_query` でスロークエリのログをホストにコピー
+3. `pt-query-digest development/mysql/mysql_log/slow_query.log` を実行
