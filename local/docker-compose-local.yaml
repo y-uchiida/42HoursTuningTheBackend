@@ -8,6 +8,10 @@ services:
           - target: 80
             published: 8080
             protocol: tcp
+      volumes:
+        - ./localNginx/custom.conf:/etc/nginx/conf.d/default.conf
+        - ./localNginx/nginx.conf:/etc/nginx/nginx.conf
+        - ./localNginx/nginx_log:/var/log/nginx
     backend:
       init: true
       build:
