@@ -92,15 +92,61 @@ const postRecords = async (req, res) => {
       user.user_id,
     ],
   );
+  var i = 0;
+
+  var values = [];
 
   for (const e of body.fileIdList) {
-    await pool.query(
-      `insert into record_item_file
+    values.push([`${newId}`, `${e.fileId}`, `${e.thumbFileId}`]);
+    i++;
+    if (i == 1000) {
+      await pool.query(`insert into record_item_file
         (linked_record_id, linked_file_id, linked_thumbnail_file_id, created_at)
-        values (?, ?, ?, now())`,
-      [`${newId}`, `${e.fileId}`, `${e.thumbFileId}`],
-    );
+        values (?, ?, ?, now())`, 
+        [values], (err, results) => {
+          console.log(err)
+          console.log(results)
+        });
+      values = [];
+      i = 0;
+    }
   }
+  if (values.length != 0) {
+    await pool.query(`insert into record_item_file
+      (linked_record_id, linked_file_id, linked_thumbnail_file_id, created_at)
+      values (?, ?, ?, now())`, 
+      [values], (err, results) => {
+        console.log(err)
+        console.log(results)
+      });
+  }
+    
+  // for (const e of body.fileIdList) {
+  //   await pool.query(
+  //     `insert into record_item_file
+  //       (linked_record_id, linked_file_id, linked_thumbnail_file_id, created_at)
+  //       values (?, ?, ?, now())`,
+  //     [`${newId}`, `${e.fileId}`, `${e.thumbFileId}`],
+  //   );
+  // }
+  // const mysql = require('mysql')
+  // // データベース接続
+  // const con = mysql.createConnection({
+  //     host     : '192.168.1.102',
+  //     user     : 'admin',
+  //     password : 'P@ssw0rd',
+  //     database : 'sample'
+  // })
+  // con.connect()
+  // // 登録用のデータ
+  // const values = [['データ１'], ['データ２'], ['データ３'], ['データ４']]
+  // // データの一括登録
+  // // リストを更にリストにする
+  // con.query('INSERT INTO test(value) VALUES ?', [values], (err, results) => {
+  //     console.log(err)
+  //     console.log(results)
+  //     con.end()
+  // })
 
   res.send({ recordId: newId });
 };
